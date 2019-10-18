@@ -1,0 +1,7 @@
+RewriteEngine on
+
+# remove index.php
+RewriteCond %{THE_REQUEST} (?:/[^/]*)*/index\.php[?#\ ]
+RewriteRule .* %{REQUEST_URI}/../ [L,R=301]
+
+RewriteRule ^([a-zA-Z0-9\-\_\/]*)$ framework/webroot/$1
