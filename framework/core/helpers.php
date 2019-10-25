@@ -1,5 +1,8 @@
 <?php
 function tableize($string) {
+  if (strtoupper(substr($string, 0, -1)) == substr($string, 0, -1)) {
+    return strtolower($string);
+  }
   return Doctrine\Common\Inflector\Inflector::tableize($string);
 }
 
