@@ -13,14 +13,14 @@ class Model  // Empty model class template
       'id' => $id
     ];
 
+    $objects = Model::query($sql, $params);
+
     if (empty($objects)) {
       return null;
     } else {
       $called_class = get_called_class();
       return new $called_class($objects[0]);
     }
-
-    return Model::query($sql, $params);
   }
 
   public static function all() {
