@@ -1,8 +1,11 @@
 <?php
 class Model  // Empty model class template
 {
-  private function __construct() {
-
+  private function __construct($data) {
+    foreach ($data as $key => $value)
+    {
+      $this->$key = $value;
+    }
   }
 
   public static function get_by_id($id) {
@@ -18,8 +21,7 @@ class Model  // Empty model class template
     if (empty($objects)) {
       return null;
     } else {
-      $called_class = get_called_class();
-      return new $called_class($objects[0]);
+      return new $objects[0];
     }
   }
 
@@ -29,11 +31,6 @@ class Model  // Empty model class template
     $params = [];
 
     $objects = Model::query($sql, $params);
-    $called_class = get_called_class();
-
-    for ($i = 0; $i < count($objects); $i++) {
-      $objects[$i] = new $called_class($objects[$i]);
-    }
 
     return $objects;
   }
@@ -43,7 +40,13 @@ class Model  // Empty model class template
     $result = $request->execute($params);
 
     if ($result) {
-      return $request->fetchAll(PDO::FETCH_ASSOC);
+      $objects = $request->fetchAll(PDO::FETCH_ASSOC);
+      $called_class = get_called_class();
+
+      for ($i = 0; $i < count($objects); $i++) {
+        $objects[$i] = new $called_class($objects[$i]);
+      }
+      return $objects;
     } else {
       return [];
     }
