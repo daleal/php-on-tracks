@@ -1,5 +1,11 @@
 # PHP on Tracks
 
+A rails-inspired PHP MVC framework that works **automagically** ✨
+
+![PHP-on-Tracks](assets/php-on-tracks.jpg)
+
+Kudos to [@auirarrazaval](https://github.com/auirarrazaval) for the **awesome** depiction of the framework.
+
 ## Usage
 
 To be able to use the framework, it must be run within an apache webserver where the app can use `.htaccess` files.
